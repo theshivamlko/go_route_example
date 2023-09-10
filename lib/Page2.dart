@@ -12,12 +12,9 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+
   }
 
   @override

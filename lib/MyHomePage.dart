@@ -40,31 +40,32 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  String text="Shivam";
+                  String text = "Page1 URL param";
                   GoRouter.of(context).push("/page2/$text");
-                  //    context.go("/page2");
                 },
                 child: Text("Open Page2")),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).push("/page3");
-                  //    context.go("/page2");
+                  GoRouter.of(context).pushNamed(RoutesName.page2,
+                      pathParameters: {"name": "Page1 NamedParam"});
+                  //     context.go("/page2");
+                },
+                child: Text("Open Page2 Names")),
+            ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).push("/page3/${"Page1 Goparam"}");
+                  //  context.go("/page3/${"Page1 Goparam"}");
                 },
                 child: Text("Open Page3")),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).push("/page3/page4");
-                  //    context.go("/page2");
+                  context.goNamed( RoutesName.page4_2,pathParameters:{"value":"Page1 NamedParam"} );
+                //  GoRouter.of(context).pushNamed(RoutesName.page4_2,pathParameters: {"value":"Page1 NamedParam"});
                 },
                 child: Text("Open Page4")),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
