@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'GoRouter.dart';
 
-class Page2 extends StatefulWidget {
-  final String text;
-
-  Page2({required this.text, super.key});
+class Page4 extends StatefulWidget {
+  const Page4({super.key});
 
   @override
-  State<Page2> createState() => _Page2State();
+  State<Page4> createState() => _Page4State();
 }
 
-class _Page2State extends State<Page2> {
+class _Page4State extends State<Page4> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -25,18 +23,18 @@ class _Page2State extends State<Page2> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Page 2"),
+        title: Text("Page 4"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Page2  ',
+              'Page 4',
               style: textStyle,
             ),
             Text(
-              '${widget.text}',
+              '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],

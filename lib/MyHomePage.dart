@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'GoRouter.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -27,13 +30,33 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              'Page1 ',
+              style: textStyle,
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            ElevatedButton(
+                onPressed: () {
+                  String text="Shivam";
+                  GoRouter.of(context).push("/page2/$text");
+                  //    context.go("/page2");
+                },
+                child: Text("Open Page2")),
+            ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).push("/page3");
+                  //    context.go("/page2");
+                },
+                child: Text("Open Page3")),
+            ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).push("/page3/page4");
+                  //    context.go("/page2");
+                },
+                child: Text("Open Page4")),
           ],
         ),
       ),
