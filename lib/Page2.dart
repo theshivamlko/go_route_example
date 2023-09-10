@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'GoRouter.dart';
 
 class Page2 extends StatefulWidget {
-  final String text;
+  final String pathParam;
+  String? queryParam1;
 
-  Page2({required this.text, super.key});
+  Page2({required this.pathParam, this.queryParam1, super.key});
 
   @override
   State<Page2> createState() => _Page2State();
 }
 
 class _Page2State extends State<Page2> {
-
-  void _incrementCounter() {
-
-  }
+  void _incrementCounter() {}
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +30,15 @@ class _Page2State extends State<Page2> {
               'Page2  ',
               style: textStyle,
             ),
+            Padding(padding: EdgeInsets.all(10)),
             Text(
-              '${widget.text}',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Path = ${widget.pathParam}',
+              style: textStyle,
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              'Query = ${widget.queryParam1}',
+              style: textStyle,
             ),
           ],
         ),

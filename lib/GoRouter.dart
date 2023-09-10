@@ -14,6 +14,7 @@ final GoRouter goRouter = GoRouter(
         path: "/",
         builder: (context, state) {
           print("MyHomePage PATH ${state.fullPath}");
+
           return MyHomePage();
         },
         // nested path
@@ -22,8 +23,9 @@ final GoRouter goRouter = GoRouter(
               name: RoutesName.page2,
               path: "page2/:name",
               builder: (context, state) {
-                print("Page2 PATH ${state.fullPath}");
-                return Page2(text: state.pathParameters["name"]!);
+                var stateParam =  state.uri.queryParameters;
+                print("Page2 PATH ${state.fullPath}  ${state.pathParameters} ${state.uri.queryParameters}");
+                return Page2(pathParam: state.pathParameters["name"]!,queryParam1: stateParam["value1"],);
               },
               routes: [
                 GoRoute(
@@ -65,4 +67,7 @@ class RoutesName {
   static const page4_2 = "page4_2";
 }
 
-TextStyle textStyle = TextStyle(fontSize: 20);
+
+
+
+TextStyle textStyle = TextStyle(fontSize: 16);

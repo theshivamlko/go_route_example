@@ -17,6 +17,7 @@ class _Page3State extends State<Page3> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("Page3 initState");
 
   }
 

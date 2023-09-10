@@ -40,29 +40,38 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  String text = "Page1 URL param";
+                  String text = "Page1 Path param";
                   GoRouter.of(context).push("/page2/$text");
                 },
-                child: Text("Open Page2")),
+                child: Text("Open Page2 Path Param")),
             ElevatedButton(
                 onPressed: () {
                   GoRouter.of(context).pushNamed(RoutesName.page2,
-                      pathParameters: {"name": "Page1 NamedParam"});
+                      pathParameters: {"name": "Page1 Named Param"});
                   //     context.go("/page2");
                 },
-                child: Text("Open Page2 Names")),
+                child: Text("Open Page2 Named Param")),
             ElevatedButton(
                 onPressed: () {
                   GoRouter.of(context).push("/page3/${"Page1 Goparam"}");
                   //  context.go("/page3/${"Page1 Goparam"}");
                 },
-                child: Text("Open Page3")),
+                child: Text("Open Page3 Path Param")),
             ElevatedButton(
                 onPressed: () {
-                  context.goNamed( RoutesName.page4_2,pathParameters:{"value":"Page1 NamedParam"} );
-                //  GoRouter.of(context).pushNamed(RoutesName.page4_2,pathParameters: {"value":"Page1 NamedParam"});
+                  context.goNamed(RoutesName.page4_2,
+                      pathParameters: {"value": "Page1 NamedParam"});
+                  //  GoRouter.of(context).pushNamed(RoutesName.page4_2,pathParameters: {"value":"Page1 NamedParam"});
                 },
-                child: Text("Open Page4")),
+                child: Text("Open Page4 Named Param")),
+            ElevatedButton(
+                onPressed: () {
+                  String text = "Page2 Path & Query param";
+                  GoRouter.of(context).pushNamed(RoutesName.page2,
+                      pathParameters: {"name": text},
+                      queryParameters: {"value1": "QueryValue1"});
+                },
+                child: Text("Open Page2 Path & Query param")),
           ],
         ),
       ),
