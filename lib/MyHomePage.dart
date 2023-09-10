@@ -15,18 +15,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String email = "";
 
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp)async {
-      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
-      email= sharedPreferences.getString("email")??"";
-      setState(() {
-
-      });
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      email = sharedPreferences.getString("email") ?? "";
+      setState(() {});
     });
   }
 
@@ -61,13 +58,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       pathParameters: {"name": "Page1 Named Param"});
                   //     context.go("/page2");
                 },
-                child: Text("Open Page2 Named Param")),
+                child: Text("Page2 Named Param")),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).push("/page3/${"Page1 Goparam"}");
-                  //  context.go("/page3/${"Page1 Goparam"}");
+                  // GoRouter.of(context).push("/page3/${"Page1 Goparam"}");
+                  try {
+                    context.go("/page3/${"Page1 Goparam"}");
+                  } catch (e) {
+                    print(e);
+                  }
                 },
-                child: Text("Open Page3 Path Param")),
+                child: Text("GO Page3 Path Param")),
             ElevatedButton(
                 onPressed: () {
                   context.goNamed(RoutesName.page4_2,
@@ -83,6 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       queryParameters: {"value1": "QueryValue1"});
                 },
                 child: Text("Open Page2 Path & Query param")),
+            ElevatedButton(
+                onPressed: () {
+                   GoRouter.of(context).pushNamed(RoutesName.page4_2,
+                      pathParameters: {"value": "Page1 NamedParam"});
+                },
+                child: Text("Page4 Animation Path, Query param")),
           ],
         ),
       ),

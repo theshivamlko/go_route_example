@@ -13,15 +13,15 @@ final GoRouter goRouter = GoRouter(
   //  initialLocation: "/page2",
   redirect: (context, state) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    print("redirect ${state.fullPath}");
     await Future.delayed(const Duration(seconds: 1));
     String email = sharedPreferences.getString("email") ?? "";
     if (email.isNotEmpty && !email.contains("@")) {
       return "/errorPage";
+    } else if (email.isEmpty) {
+      return "/login";
     }
-    if (email.isNotEmpty) {
-      return "/";
-    }
-    return "/login1";
+    return state.path;
   },
   errorBuilder: (context, state) {
     return ErrorPage(
@@ -75,8 +75,24 @@ final GoRouter goRouter = GoRouter(
             name: RoutesName.page4_2,
             path: "page4_2",
             builder: (context, state) {
-              print("Page4-2 PATH ${state.fullPath}");
+              print("builder Page4-2 PATH ${state.fullPath}");
               return Page4();
+            },
+            pageBuilder: (context, state) {
+              print("pageBuilder Page4-2 PATH ${state.fullPath}");
+              return CustomTransitionPage(
+                transitionDuration: Duration(seconds: 4),
+                key: state.pageKey,
+                child: Page4(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity:
+                        CurveTween(curve: Curves.bounceIn).animate(animation),
+                    child: child,
+                  );
+                },
+              );
             },
           ),
         ]),
