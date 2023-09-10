@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_route_example/GoRouter.dart';
 import 'package:go_route_example/MyHomePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() async {
 
 
 
-void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   @override
@@ -21,9 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routerConfig: goRouter,
-    //  home: MyHomePage(),
+      //  home: MyHomePage(),
     );
   }
 }
-
-

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'GoRouter.dart';
 
@@ -11,11 +13,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  String email = "";
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp)async {
+      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+      email= sharedPreferences.getString("email")??"";
+      setState(() {
+
+      });
     });
   }
 
@@ -35,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: textStyle,
             ),
             Text(
-              '$_counter',
+              'Email: $email',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             ElevatedButton(
