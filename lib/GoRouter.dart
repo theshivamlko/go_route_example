@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_route_example/ErrorPage.dart';
 import 'package:go_route_example/Login.dart';
 import 'package:go_route_example/MyHomePage.dart';
 import 'package:go_route_example/Page2.dart';
@@ -12,19 +13,28 @@ final GoRouter goRouter = GoRouter(
   //  initialLocation: "/page2",
   redirect: (context, state) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await Future.delayed(Duration(seconds: 1));
-    if (sharedPreferences.getString("email") != null) {
+    await Future.delayed(const Duration(seconds: 1));
+    String email = sharedPreferences.getString("email") ?? "";
+    if (email.isNotEmpty && !email.contains("@")) {
+      return "/errorPage";
+    }
+    if (email.isNotEmpty) {
       return "/";
     }
-    return "/login";
+    return "/login1";
   },
+  errorBuilder: (context, state) {
+    return ErrorPage(
+      errorText: 'Page Not Found',
+    );
+  },
+
   routes: [
     GoRoute(
         name: RoutesName.home,
         path: "/",
         builder: (context, state) {
           print("MyHomePage PATH ${state.fullPath}");
-
           return MyHomePage();
         },
         // nested path
@@ -34,7 +44,6 @@ final GoRouter goRouter = GoRouter(
               path: "page2/:name",
               builder: (context, state) {
                 var stateParam = state.uri.queryParameters;
-
                 return Page2(
                   pathParam: state.pathParameters["name"]!,
                   queryParam1: stateParam["value1"],
@@ -78,6 +87,14 @@ final GoRouter goRouter = GoRouter(
         print("Login PATH ${state.fullPath} ${state.pathParameters}");
         return Login(pathParam: '');
       },
+    ),
+    GoRoute(
+      name: RoutesName.pageError,
+      path: "/errorPage",
+      builder: (context, state) {
+        print("ErrorPage PATH ${state.fullPath} ${state.pathParameters}");
+        return ErrorPage(errorText: '');
+      },
     )
   ],
 );
@@ -89,6 +106,7 @@ class RoutesName {
   static const page4 = "page4";
   static const page4_2 = "page4_2";
   static const pageLogin = "login";
+  static const pageError = "errorPage";
 }
 
 TextStyle textStyle = TextStyle(fontSize: 16);
