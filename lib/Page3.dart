@@ -28,20 +28,19 @@ class _Page3State extends State<Page3> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Page 3"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Page 3 ',
-              style: textStyle,
-            ),
-            Text(
-              '${widget.text}',
-              style: textStyle,
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            'Page 3 ',
+            style: textStyle,
+          ),
+          Text(
+            '${widget.text}',
+            style: textStyle,
+          ),
+        ],
       ),
      );
   }
