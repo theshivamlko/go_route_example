@@ -14,57 +14,51 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (value) => _onTap(value),
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.grey,
-              ),
-              activeIcon: Icon(
-                Icons.home,
-                color: Colors.green,
-              ),
-              label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle,
-                color: Colors.grey,
-              ),
-              activeIcon: Icon(
-                Icons.account_circle,
-                color: Colors.green,
-              ),
-              label: "Profile"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                color: Colors.grey,
-              ),
-              activeIcon: Icon(
-                Icons.settings,
-                color: Colors.green,
-              ),
-              label: "Settings"),
-        ]);
+    return BottomNavigationBar(currentIndex: _currentIndex, onTap: (value) => _onTap(value), items: [
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            color: Colors.grey,
+          ),
+          activeIcon: Icon(
+            Icons.home,
+            color: Colors.green,
+          ),
+          label: "Home"),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.account_circle,
+            color: Colors.grey,
+          ),
+          activeIcon: Icon(
+            Icons.account_circle,
+            color: Colors.green,
+          ),
+          label: "Profile"),
+      BottomNavigationBarItem(
+          icon: Icon(
+            Icons.settings,
+            color: Colors.grey,
+          ),
+          activeIcon: Icon(
+            Icons.settings,
+            color: Colors.green,
+          ),
+          label: "Settings"),
+    ]);
   }
 
   void _onTap(int index) {
     print(index);
     switch (index) {
       case 0:
-        context.goNamed(RoutesName.bottomNavPage1,
-            pathParameters: {"value": "Home"});
+        context.goNamed(RoutesName.bottomNavPage1, pathParameters: {"value": "Home"});
         break;
       case 1:
-        context.goNamed(RoutesName.bottomNavPage1,
-            pathParameters: {"value": "Profile"});
+        context.goNamed(RoutesName.bottomNavPage1, pathParameters: {"value": "Profile"});
         break;
       case 2:
-        context.goNamed(RoutesName.bottomNavPage1,
-            pathParameters: {"value": "Settings"});
+        context.goNamed(RoutesName.bottomNavPage1, pathParameters: {"value": "Settings"});
         break;
     }
     setState(() {});

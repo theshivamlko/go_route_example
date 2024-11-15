@@ -20,8 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       email = sharedPreferences.getString("email") ?? "";
       setState(() {});
     });
@@ -54,8 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("Open Page2 Path Param")),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context).pushNamed(RoutesName.page2,
-                      pathParameters: {"name": "Page1 Named Param"});
+                  GoRouter.of(context).pushNamed(RoutesName.page2, pathParameters: {"name": "Page1 Named Param"});
                   //     context.go("/page2");
                 },
                 child: Text("Page2 Named Param")),
@@ -71,25 +69,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("GO Page3 Path Param")),
             ElevatedButton(
                 onPressed: () {
-                  context.goNamed(RoutesName.page4_2,
-                      pathParameters: {"value": "Page1 NamedParam"});
+                  context.goNamed(RoutesName.page4_2, pathParameters: {"value": "Page1 NamedParam"});
                   //  GoRouter.of(context).pushNamed(RoutesName.page4_2,pathParameters: {"value":"Page1 NamedParam"});
                 },
                 child: Text("Open Page4 Named Param")),
             ElevatedButton(
                 onPressed: () {
                   String text = "Page2 Path & Query param";
-                  GoRouter.of(context).pushNamed(RoutesName.page2,
-                      pathParameters: {"name": text},
-                      queryParameters: {"value1": "QueryValue1"});
+                  GoRouter.of(context).pushNamed(RoutesName.page2, pathParameters: {"name": text}, queryParameters: {"value1": "QueryValue1"});
                 },
                 child: Text("Open Page2 Path & Query param")),
             ElevatedButton(
                 onPressed: () {
-                   GoRouter.of(context).pushNamed(RoutesName.page4_2,
-                      pathParameters: {"value": "Page1 NamedParam"});
+                  GoRouter.of(context).pushNamed(RoutesName.page4_2, pathParameters: {"value": "Page1 NamedParam"});
                 },
                 child: Text("Page4 Animation Path, Query param")),
+            ElevatedButton(
+                onPressed: () {
+                  GoRouter.of(context).push(RoutesName.nestedPage);
+                },
+                child: Text("Nested navigation")),
           ],
         ),
       ),

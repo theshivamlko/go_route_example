@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'GoRouter.dart';
 
 class Page3 extends StatefulWidget {
   final String text;
-  Page3({required this.text, super.key});
+
+  Page3({
+    required this.text,
+  }) : super();
 
   @override
   State<Page3> createState() => _Page3State();
 }
 
 class _Page3State extends State<Page3> {
-
- @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     print("Page3 initState");
-
   }
 
   @override
@@ -42,6 +42,6 @@ class _Page3State extends State<Page3> {
           ),
         ],
       ),
-     );
+    );
   }
 }

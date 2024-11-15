@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_route_example/ErrorPage.dart';
 import 'package:go_route_example/Login.dart';
 import 'package:go_route_example/MyHomePage.dart';
+import 'package:go_route_example/NestedNavigation.dart';
+import 'package:go_route_example/NestedPage1.dart';
 import 'package:go_route_example/Page2.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,10 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Page3.dart';
 import 'Page4.dart';
 
-GlobalKey<NavigatorState> navigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: "root");
-GlobalKey<NavigatorState> shellKey =
-    GlobalKey<NavigatorState>(debugLabel: "shell");
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>(debugLabel: "root");
+GlobalKey<NavigatorState> shellKey = GlobalKey<NavigatorState>(debugLabel: "shell");
+GlobalKey<NavigatorState> shellKey2 = GlobalKey<NavigatorState>(debugLabel: "shell");
 
 final GoRouter goRouter = GoRouter(
   //  initialLocation: "/page2",
@@ -51,6 +52,7 @@ final GoRouter goRouter = GoRouter(
               builder: (context, state) {
                 var stateParam = state.uri.queryParameters;
                 return Page2(
+                  key: state.pageKey,
                   pathParam: state.pathParameters["name"]!,
                   queryParam1: stateParam["value1"],
                 );
@@ -90,11 +92,9 @@ final GoRouter goRouter = GoRouter(
                 transitionDuration: Duration(seconds: 4),
                 key: state.pageKey,
                 child: Page4(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
                   return FadeTransition(
-                    opacity:
-                        CurveTween(curve: Curves.bounceIn).animate(animation),
+                    opacity: CurveTween(curve: Curves.bounceIn).animate(animation),
                     child: child,
                   );
                 },
@@ -119,12 +119,12 @@ final GoRouter goRouter = GoRouter(
       },
     ),
     ShellRoute(
-        navigatorKey: shellKey,
         builder: (context, state, child) {
           print("Page2 ShellRoute ${state.fullPath} ${child}");
           return Page2(
             pathParam: "shell Navigator",
             child: child,
+            key: state.pageKey,
           );
         },
         routes: [
@@ -164,7 +164,24 @@ final GoRouter goRouter = GoRouter(
               );
             },
           ),
-        ])
+        ]),
+    GoRoute(
+        path: RoutesName.nestedPage,
+        builder: (context, state) {
+          print("nestedPage ShellRoute   ${state.fullPath} ${state.pathParameters}");
+          return NestedNavigation();
+        },
+        routes: [
+          ShellRoute(parentNavigatorKey: shellKey2, routes: [
+            GoRoute(
+              path: RoutesName.nestedPage1,
+              builder: (context, state) {
+                print("nestedPage1 ShellRoute   ${state.fullPath} ${state.pathParameters}");
+                return NestedPage1();
+              },
+            ),
+          ])
+        ]),
   ],
 );
 
@@ -176,11 +193,12 @@ class RoutesName {
   static const page4_2 = "page4_2";
   static const pageLogin = "login";
   static const pageError = "errorPage";
+  static const nestedPage = "/nestedPage";
+  static const nestedPage1 = "nestedPage1";
 
   static const bottomNavPage1 = "bottomNavPage1";
   static const bottomNavPage2 = "bottomNavPage2";
   static const bottomNavPage3 = "bottomNavPage3";
-
 }
 
 TextStyle textStyle = TextStyle(fontSize: 16);

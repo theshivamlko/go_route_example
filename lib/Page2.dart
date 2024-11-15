@@ -7,8 +7,9 @@ class Page2 extends StatefulWidget {
   final String pathParam;
   String? queryParam1;
   Widget? child;
+  Key key;
 
-  Page2({required this.pathParam, this.queryParam1, this.child, super.key});
+  Page2({required this.pathParam, this.queryParam1, this.child, required this.key}) : super(key: key);
 
   @override
   State<Page2> createState() => _Page2State();
@@ -26,28 +27,28 @@ class _Page2State extends State<Page2> {
       ),
 
       bottomNavigationBar: BottomNav(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            'Page2  ',
-            style: textStyle,
-          ),
-          Padding(padding: EdgeInsets.all(10)),
-          Text(
-            'Path = ${widget.pathParam}',
-            style: textStyle,
-          ),
-          Padding(padding: EdgeInsets.all(10)),
-          Text(
-            'Query = ${widget.queryParam1}',
-            style: textStyle,
-          ),
-          Container(
-              height: 300,
-              child: widget.child ?? Center())
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'Page2  ',
+              style: textStyle,
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              'Path = ${widget.pathParam}',
+              style: textStyle,
+            ),
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              'Query = ${widget.queryParam1}',
+              style: textStyle,
+            ),
+            Container(height: 300, child: widget.child ?? Center())
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
